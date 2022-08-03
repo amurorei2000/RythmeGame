@@ -4,16 +4,21 @@ using UnityEngine;
 
 public class NodeMove : MonoBehaviour
 {
-    public float moveSpeed = 2;
+    public float downTime = 3.0f;
+    public float moveDistance = 0;
 
     void Start()
     {
+        float bps = downTime / Time.fixedDeltaTime;
+        moveDistance = 9.0f / bps;
+        print($"{bps}, {moveDistance}");
+
         Invoke("DeActivateSelf", 5.0f);
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        transform.position += Vector3.down * moveSpeed * Time.deltaTime;
+        transform.position += Vector3.down * moveDistance;
     }
 
     void DeActivateSelf()
